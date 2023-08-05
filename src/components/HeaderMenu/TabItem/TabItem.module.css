@@ -1,0 +1,9 @@
+.container {
+  display: flex;
+  width: 150px;
+  /* height: 20px; */
+  padding: 8px;
+  border: 1px solid black;
+  background-color: white;
+  cursor: pointer;
+}

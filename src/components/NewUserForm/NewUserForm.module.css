@@ -1,0 +1,104 @@
+.container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #5c5c5c
+    url("https://www.protectedtext.com/css/custom-theme/images/ui-bg_diagonals-thick_3_5c5c5c_40x40.png")
+    50% 50% repeat;
+  opacity: 0.8;
+  color: white;
+}
+
+.modalContainer {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: black;
+  max-width: 300px;
+  padding: 4px;
+  border-radius: 6px;
+}
+
+.header {
+  border: 1px solid #333;
+  background: black
+    url("https://www.protectedtext.com/css/custom-theme/images/ui-bg_gloss-wave_35_333333_500x100.png")
+    50% 50% repeat-x;
+  color: #ffffff;
+  border-radius: 6px;
+  padding: 6.16px 15.4px;
+  font-size: 15.4px;
+  margin: 1.54px 0;
+  position: relative;
+}
+
+.headerOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: black;
+  opacity: 0.2;
+}
+
+.headerTitle {
+  position: relative;
+  opacity: 1;
+}
+
+.message {
+  padding: 12px;
+  font-size: 15.6px;
+  font-weight: 400;
+}
+
+.roomName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.inputFieldContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.passwordField {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  border-radius: 3px;
+  border: none;
+  width: 80%;
+  font-size: 14px;
+  outline: none;
+}
+
+.btnContainer {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  display: flex;
+  flex-direction: row;
+  padding: 8px;
+  font-size: 14px;
+  flex-direction: flex-end;
+  cursor: pointer;
+}
