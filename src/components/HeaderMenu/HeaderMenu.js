@@ -2,7 +2,14 @@ import React from "react";
 import classes from "./HeaderMenu.module.css";
 import TabItem from "./TabItem";
 
-const HeaderMenu = ({ tabs, activeDocumentId, onActiveDocumentChange }) => {
+const HeaderMenu = ({
+  tabs,
+  activeTabId,
+  editableTabId,
+  onTabChange,
+  onCreateTab,
+  onTabEdit,
+}) => {
   return (
     <div className={classes.container}>
       {tabs.map((tab) => {
@@ -11,11 +18,17 @@ const HeaderMenu = ({ tabs, activeDocumentId, onActiveDocumentChange }) => {
             key={tab.id}
             id={tab.id}
             title={tab.title}
-            activeDocumentId={activeDocumentId}
-            onClick={onActiveDocumentChange}
+            isEditable={tab.id === editableTabId}
+            activeTabId={activeTabId}
+            onClick={onTabChange}
+            onEdit={onTabEdit}
           />
         );
       })}
+
+      <button className={classes.button} onClick={onCreateTab}>
+        +
+      </button>
     </div>
   );
 };

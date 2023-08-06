@@ -11,6 +11,7 @@ import classes from "./Main.module.css";
 const Main = () => {
   const [roomId, setRoomId] = useState(null);
   const [activeDocumentId, setActiveDocumentId] = useState(null);
+  const [editableTabId, setEditableTabId] = useState(null);
   const [isNewUser, setIsNewUser] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [tabs, setTabs] = useState([]);
@@ -105,6 +106,35 @@ const Main = () => {
     setActiveDocumentId(id);
   };
 
+  const handleCreateClicked = (id) => {
+    setEditableTabId(id);
+  };
+
+  const handleTitleEdit = async (id, isEditTrue, newTitle) => {
+    if (isEditTrue) setEditableTabId(id);
+    else {
+      setEditableTabId(null);
+      console.log("newTitle", newTitle);
+      try {
+        const token = sessionStorage.getItem("token");
+
+        const { data } = await axios.put(
+          `${BACKEND_URI}/api/documents/update/title/${id}`,
+          {
+            title: newTitle,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
   return (
     <div className={classes.container}>
       {isNewUser && (
@@ -117,8 +147,11 @@ const Main = () => {
         <>
           <HeaderMenu
             tabs={tabs}
-            activeDocumentId={activeDocumentId}
-            onActiveDocumentChange={handleActiveDocumentChange}
+            activeTabId={activeDocumentId}
+            editableTabId={editableTabId}
+            onTabChange={handleActiveDocumentChange}
+            onCreateTab={handleCreateClicked}
+            onTabEdit={handleTitleEdit}
           />
 
           <TextEditor roomId={roomId} documentId={activeDocumentId} />
