@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import classes from "./NewUserForm.module.css";
+import classes from "./AuthForm.module.css";
 
-const NewUserForm = ({ roomName, onCreate }) => {
+const AuthForm = ({ mode, roomName, onSubmit }) => {
   const [password, setPassword] = useState("");
 
   return (
@@ -9,12 +9,15 @@ const NewUserForm = ({ roomName, onCreate }) => {
       <div className={classes.modalContainer}>
         <div className={classes.header}>
           <div className={classes.headerOverlay}></div>
-          <div className={classes.headerTitle}>Create a new site?</div>
+          <div className={classes.headerTitle}>
+            {mode === "login" ? "Exisiting user!" : "Create a new site?"}
+          </div>
         </div>
 
         <div className={classes.message}>
-          Great! This site doesn't exist, it can be yours! Would you like to
-          create:
+          {mode === "signup"
+            ? "Great! This site doesn't exist, it can be yours! Would you like to create:"
+            : "Enter the password to get access to:"}
         </div>
 
         <div className={classes.roomName}>{roomName}</div>
@@ -30,8 +33,9 @@ const NewUserForm = ({ roomName, onCreate }) => {
             className={classes.passwordField}
           />
           <div className={classes.btnContainer}>
-            <button onClick={() => onCreate(password)}>Create site</button>
-            <button>Cancel</button>
+            <button onClick={() => onSubmit(password)}>
+              {mode === "signup" ? "Create site" : "Decrypt this site"}
+            </button>
           </div>
         </div>
       </div>
@@ -39,4 +43,4 @@ const NewUserForm = ({ roomName, onCreate }) => {
   );
 };
 
-export default NewUserForm;
+export default AuthForm;

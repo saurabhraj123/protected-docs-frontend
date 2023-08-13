@@ -19,6 +19,7 @@
 .modalContainer {
   font-family: "Segoe UI", Arial, sans-serif;
   background-color: black;
+  min-width: 290px;
   max-width: 300px;
   padding: 4px;
   border-radius: 6px;

@@ -2,8 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BACKEND_URI } from "../config";
-import NewUserForm from "../components/NewUserForm";
-import LoginForm from "../components/LoginForm/LoginForm";
+import AuthForm from "../components/AuthForm";
 import HeaderMenu from "../components/HeaderMenu/HeaderMenu";
 import TextEditor from "../components/TextEditor/TextEditor";
 import classes from "./Main.module.css";
@@ -201,10 +200,20 @@ const Main = () => {
   return (
     <div className={classes.container}>
       {isNewUser && (
-        <NewUserForm roomName={roomName} onCreate={handleUserCreate} />
+        <AuthForm
+          mode={"signup"}
+          roomName={roomName}
+          onSubmit={handleUserCreate}
+        />
       )}
 
-      {!isNewUser && !isLoggedIn && <LoginForm onSubmit={handleUserLogin} />}
+      {!isNewUser && !isLoggedIn && (
+        <AuthForm
+          mode={"login"}
+          roomName={roomName}
+          onSubmit={handleUserLogin}
+        />
+      )}
 
       {!isNewUser && isLoggedIn && (
         <>
