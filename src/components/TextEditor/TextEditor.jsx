@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
 import { io } from "socket.io-client";
 import "./TextEditor.css";
 
-var toolbarOptions = [
+const toolbarOptions = [
   ["bold", "italic", "underline", "strike"],
   [{ header: [1, 2, 3, 4, 5, 6, false] }],
   [{ color: [] }, { background: [] }],
@@ -16,7 +16,8 @@ var toolbarOptions = [
 const TextEditor = ({ roomId, documentId }) => {
   const [socket, setSocket] = useState(null);
   const [quill, setQuill] = useState();
-  const [isTextChange, setIsTextChange] = useState(false);
+
+  const textChangeRef = useRef(false);
 
   const containerRef = useCallback((wrapper) => {
     if (wrapper == null) return;
@@ -33,8 +34,11 @@ const TextEditor = ({ roomId, documentId }) => {
 
   useEffect(() => {
     const beforeUnloadListener = (e) => {
-      e.preventDefault();
-      e.returnValue = "Please save your document first."; // For Chrome
+      console.log("yaha aahi gaya");
+      if (textChangeRef.current) {
+        e.preventDefault();
+        e.returnValue = "Please save your document first.";
+      }
     };
 
     window.addEventListener("beforeunload", beforeUnloadListener);
@@ -73,12 +77,17 @@ const TextEditor = ({ roomId, documentId }) => {
     if (socket === null || quill === null) return;
 
     const interval = setInterval(() => {
-      if (isTextChange) {
+      console.log("isTextChange", textChangeRef.current);
+      if (textChangeRef.current) {
         socket.emit("save-document", quill.getContents(), documentId);
         console.log("it is called");
-        setIsTextChange(false);
       }
     }, 2000);
+
+    socket.on("changes-saved", () => {
+      console.log("changes-saved");
+      textChangeRef.current = false;
+    });
 
     return () => {
       clearInterval(interval);
@@ -95,7 +104,7 @@ const TextEditor = ({ roomId, documentId }) => {
       console.log("documentId", documentId);
       console.log("changes", delta, documentId);
       socket.emit("send-changes", delta);
-      setIsTextChange(true);
+      textChangeRef.current = true;
     };
 
     quill.on("text-change", handler);
