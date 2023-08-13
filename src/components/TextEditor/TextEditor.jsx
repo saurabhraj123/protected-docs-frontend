@@ -57,20 +57,11 @@ const TextEditor = ({ roomId, documentId }) => {
   }, [documentId]);
 
   useEffect(() => {
-    console.log(
-      "\n\nDocument Id changed to:",
-      documentId,
-      socket,
-      quill,
-      roomId
-    );
     if (socket == null || quill == null || documentId == null || roomId == null)
       return;
 
     socket.once("load-document", (document) => {
-      console.log("load document before ");
       document && quill.setContents(JSON.parse(document));
-      console.log("load document before ");
       quill.enable();
     });
 

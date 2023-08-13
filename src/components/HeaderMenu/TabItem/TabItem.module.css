@@ -1,25 +1,24 @@
 .container {
   display: flex;
-  align-items: center; /* Center content vertically */
-  padding: 8px;
-  border: 1px solid #d0d0d0; /* Light gray border */
-  background-color: #f8f8f8; /* Light gray background */
+  align-items: center;
+  padding: 10px 24px;
+  border: 1px solid #d0d0d0;
+  background-color: #f8f8f8;
   cursor: pointer;
-  border-radius: 4px 4px 0 0; /* Rounded top corners */
-  margin-right: 10px; /* Spacing between tabs */
+  border-radius: 4px 4px 0 0;
   font-family: Arial, sans-serif;
   font-weight: bold;
-  color: #333; /* Text color */
-  transition: background-color 0.2s, border-color 0.2s; /* Smooth transition */
+  color: #333;
+  transition: background-color 0.2s, border-color 0.2s;
 }
 
 .container:hover {
-  background-color: white; /* White background on hover */
-  border-color: #ccc; /* Light gray border on hover */
+  background-color: white;
+  border-color: #ccc;
 }
 
 .container.active {
-  background-color: white; /* White background for active tab */
-  border-color: #0078d4; /* Blue border for active tab */
-  color: #0078d4; /* Blue text color for active tab */
+  background-color: white;
+  border-color: #0078d4;
+  color: #0078d4;
 }

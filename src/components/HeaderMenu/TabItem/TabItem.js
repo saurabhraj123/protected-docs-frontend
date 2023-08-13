@@ -1,8 +1,10 @@
+// TabItem.js
 import React, { useEffect, useRef, useState } from "react";
 import classes from "./TabItem.module.css";
 
 const TabItem = ({ id, title, activeTabId, onClick, onEdit, isEditable }) => {
   const [editableTitle, setEditableTitle] = useState(title);
+  const [prevTitle, setPrevTitle] = useState(title);
 
   const tabRef = useRef(null);
 
@@ -16,12 +18,7 @@ const TabItem = ({ id, title, activeTabId, onClick, onEdit, isEditable }) => {
     return () => {
       window.removeEventListener("keydown", () => {});
     };
-  });
-
-  const styles = {
-    backgroundColor: activeTabId === id ? "#fff" : "#f2f2f2",
-    color: activeTabId === id ? "#000" : "#a6a6a6",
-  };
+  }, []);
 
   const handleClick = (e) => {
     e.stopPropagation();
@@ -42,13 +39,24 @@ const TabItem = ({ id, title, activeTabId, onClick, onEdit, isEditable }) => {
   };
 
   const saveTitle = () => {
+    if (editableTitle.trim() === "") {
+      tabRef.current.innerText = prevTitle;
+      setEditableTitle(prevTitle);
+      return;
+    }
+
     onEdit(id, false, editableTitle);
+    setPrevTitle(editableTitle);
   };
+
+  const tabClasses = [
+    classes.container,
+    activeTabId === id ? classes.active : "",
+  ].join(" ");
 
   return (
     <div
-      className={classes.container}
-      style={styles}
+      className={tabClasses}
       onClick={handleClick}
       contentEditable={isEditable}
       onInput={handleChange}
