@@ -26,7 +26,10 @@ const HeaderMenu = ({
         );
       })}
 
-      <button className={classes.button} onClick={onCreateTab}>
+      <button
+        className={classes.button}
+        onClick={() => onCreateTab("Untitled")}
+      >
         +
       </button>
     </div>

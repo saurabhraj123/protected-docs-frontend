@@ -106,10 +106,6 @@ const Main = () => {
     setActiveDocumentId(id);
   };
 
-  const handleCreateClicked = (id) => {
-    setEditableTabId(id);
-  };
-
   const handleTitleEdit = async (id, isEditTrue, newTitle) => {
     if (isEditTrue) setEditableTabId(id);
     else {
@@ -135,6 +131,42 @@ const Main = () => {
     }
   };
 
+  const handleCreateTab = async (title = "Untitled", content = {}) => {
+    const token = sessionStorage.getItem("token");
+
+    const newTab = {
+      id: -1,
+      roomId: roomId,
+      title: "Untitled",
+      content: {},
+    };
+
+    setTabs((prevTabs) => [...prevTabs, newTab]);
+
+    const { data } = await axios.post(
+      `${BACKEND_URI}/api/documents/create`,
+      {
+        title,
+        content: JSON.stringify(content),
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    console.log("prev", tabs);
+    const updatedTabs = tabs.filter((tab) => tab.id !== -1);
+    console.log("data\n", data, updatedTabs);
+
+    setTabs((prevTabs) => [...updatedTabs, data]);
+
+    setActiveDocumentId(data.id);
+    setEditableTabId(data.id);
+    handleTitleEdit(data.id, true, data.title);
+  };
+
   return (
     <div className={classes.container}>
       {isNewUser && (
@@ -150,7 +182,7 @@ const Main = () => {
             activeTabId={activeDocumentId}
             editableTabId={editableTabId}
             onTabChange={handleActiveDocumentChange}
-            onCreateTab={handleCreateClicked}
+            onCreateTab={handleCreateTab}
             onTabEdit={handleTitleEdit}
           />
 

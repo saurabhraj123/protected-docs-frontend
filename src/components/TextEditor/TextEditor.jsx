@@ -62,7 +62,7 @@ const TextEditor = ({ roomId, documentId }) => {
       return;
 
     socket.once("load-document", (document) => {
-      quill.setContents(JSON.parse(document));
+      document && quill.setContents(JSON.parse(document));
       quill.enable();
     });
 

@@ -9,7 +9,7 @@ const TabItem = ({ id, title, activeTabId, onClick, onEdit, isEditable }) => {
   useEffect(() => {
     window.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === "Escape") {
-        tabRef.current.blur();
+        tabRef.current?.blur();
       }
     });
 
