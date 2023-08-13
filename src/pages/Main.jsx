@@ -173,6 +173,31 @@ const Main = () => {
     handleTitleEdit(data.id, true, data.title);
   };
 
+  const handleDocumentDelete = async (id) => {
+    const shouldDelete = window.confirm(
+      "Are you sure you want to delete this document?"
+    );
+    if (!shouldDelete) return;
+
+    try {
+      const token = sessionStorage.getItem("token");
+      const { data } = await axios.delete(
+        `${BACKEND_URI}/api/documents/delete/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const updatedTabs = tabs.filter((tab) => tab.id !== id);
+      console.log("delete:", data.id);
+      console.log("updatedTabs:", updatedTabs[0].id);
+      setTabs(updatedTabs);
+      if (data.id == activeDocumentId) setActiveDocumentId(updatedTabs[0].id);
+    } catch (err) {}
+  };
+
   return (
     <div className={classes.container}>
       {isNewUser && (
@@ -190,6 +215,7 @@ const Main = () => {
             onTabChange={handleActiveDocumentChange}
             onCreateTab={handleCreateTab}
             onTabEdit={handleTitleEdit}
+            onTabDelete={handleDocumentDelete}
           />
 
           <TextEditor roomId={roomId} documentId={activeDocumentId} />

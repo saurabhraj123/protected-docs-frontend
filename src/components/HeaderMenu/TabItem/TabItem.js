@@ -1,8 +1,16 @@
-// TabItem.js
 import React, { useEffect, useRef, useState } from "react";
 import classes from "./TabItem.module.css";
+import { AiOutlineClose } from "react-icons/ai";
 
-const TabItem = ({ id, title, activeTabId, onClick, onEdit, isEditable }) => {
+const TabItem = ({
+  id,
+  title,
+  onDelete,
+  activeTabId,
+  onClick,
+  onEdit,
+  isEditable,
+}) => {
   const [editableTitle, setEditableTitle] = useState(title);
   const [prevTitle, setPrevTitle] = useState(title);
 
@@ -55,15 +63,21 @@ const TabItem = ({ id, title, activeTabId, onClick, onEdit, isEditable }) => {
   ].join(" ");
 
   return (
-    <div
-      className={tabClasses}
-      onClick={handleClick}
-      contentEditable={isEditable}
-      onInput={handleChange}
-      onBlur={saveTitle}
-      ref={tabRef}
-    >
-      {title}
+    <div className={tabClasses}>
+      <div
+        onClick={handleClick}
+        contentEditable={isEditable}
+        onInput={handleChange}
+        onBlur={saveTitle}
+        ref={tabRef}
+      >
+        {title}
+      </div>
+
+      <AiOutlineClose
+        style={{ fontSize: "14px" }}
+        onClick={() => onDelete(id)}
+      />
     </div>
   );
 };

@@ -1,7 +1,9 @@
 .container {
   display: flex;
   align-items: center;
-  padding: 10px 24px;
+  gap: 10px;
+  justify-content: space-between;
+  padding: 10px 16px;
   border: 1px solid #d0d0d0;
   background-color: #f8f8f8;
   cursor: pointer;

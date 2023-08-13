@@ -9,6 +9,7 @@ const HeaderMenu = ({
   onTabChange,
   onCreateTab,
   onTabEdit,
+  onTabDelete,
 }) => {
   return (
     <div className={classes.container}>
@@ -22,6 +23,7 @@ const HeaderMenu = ({
             activeTabId={activeTabId}
             onClick={onTabChange}
             onEdit={onTabEdit}
+            onDelete={onTabDelete}
           />
         );
       })}
