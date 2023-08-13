@@ -73,7 +73,13 @@ const Main = () => {
         password,
       });
 
+      const { roomId, token } = data;
+      sessionStorage.setItem("token", token);
+
+      await handleCreateTab();
+
       setIsNewUser(false);
+      setRoomId(roomId);
       setIsLoggedIn(true);
       console.log(data);
     } catch (err) {
