@@ -3,6 +3,7 @@ import Quill from "quill";
 import "quill/dist/quill.snow.css";
 import { io } from "socket.io-client";
 import "./TextEditor.css";
+import { SOCKET_URI } from "../../config";
 
 const toolbarOptions = [
   ["bold", "italic", "underline", "strike"],
@@ -49,7 +50,7 @@ const TextEditor = ({ roomId, documentId }) => {
   }, []);
 
   useEffect(() => {
-    const s = io("http://localhost:3001", {
+    const s = io(SOCKET_URI, {
       auth: { token: sessionStorage.getItem("token") },
     });
 
