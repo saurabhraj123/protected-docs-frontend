@@ -1,1 +1,1 @@
-export const BACKEND_URI = "http://localhost:3002";
+export const BACKEND_URI = "https://protected-docs-server.onrender.com";
