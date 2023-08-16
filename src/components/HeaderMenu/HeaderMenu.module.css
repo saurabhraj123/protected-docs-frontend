@@ -1,6 +1,50 @@
 .container {
   display: flex;
   align-items: center;
+  flex-direction: column;
   gap: 8px;
+  justify-content: center;
+  background-color: #043c6b;
+}
+
+.logo {
+  width: 220px;
+  height: 24px;
+  color: white;
+}
+
+.headContainer {
+  display: flex;
+  width: 800px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.headBtncontainer {
+  display: flex;
+  gap: 8px;
+}
+
+.headBtncontainer button {
+  border: none;
+  padding: 6px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: rgba(239, 239, 239);
+}
+
+.headBtncontainer button:hover {
+  background-color: rgba(239, 239, 239, 0.894);
+}
+
+.headBtncontainer button:active {
+  background-color: rgba(239, 239, 239);
+}
+
+.tabsContainer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
   justify-content: center;
 }

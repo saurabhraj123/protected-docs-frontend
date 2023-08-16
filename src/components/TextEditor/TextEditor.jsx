@@ -3,7 +3,9 @@ import Quill from "quill";
 import "quill/dist/quill.snow.css";
 import { io } from "socket.io-client";
 import "./TextEditor.css";
+import Tabs from "../Tabs";
 import { SOCKET_URI } from "../../config";
+import ReactDOM from "react-dom/client";
 
 const toolbarOptions = [
   ["bold", "italic", "underline", "strike"],
@@ -14,7 +16,17 @@ const toolbarOptions = [
   ["clean"],
 ];
 
-const TextEditor = ({ roomId, documentId }) => {
+const TextEditor = ({
+  roomId,
+  documentId,
+  tabs,
+  editableTabId,
+  activeTabId,
+  onTabChange,
+  onTabEdit,
+  onTabDelete,
+  onCreateTab,
+}) => {
   const [socket, setSocket] = useState(null);
   const [quill, setQuill] = useState();
 
@@ -25,13 +37,44 @@ const TextEditor = ({ roomId, documentId }) => {
 
     const editor = document.createElement("div");
     wrapper.append(editor);
+
     const q = new Quill(editor, {
       theme: "snow",
       modules: { toolbar: toolbarOptions },
     });
+
     q.disable();
     setQuill(q);
   }, []);
+
+  useEffect(() => {
+    const editorDiv = document.querySelector(".ql-toolbar");
+    const tabsContainer = document.createElement("div");
+    ReactDOM.createRoot(tabsContainer).render(
+      <Tabs
+        tabs={tabs}
+        activeTabId={activeTabId}
+        editableTabId={editableTabId}
+        onTabChange={onTabChange}
+        onCreateTab={onCreateTab}
+        onTabEdit={onTabEdit}
+        onTabDelete={onTabDelete}
+      />
+    );
+    editorDiv.after(tabsContainer);
+
+    return () => {
+      tabsContainer.remove();
+    };
+  }, [
+    tabs,
+    activeTabId,
+    editableTabId,
+    onTabChange,
+    onCreateTab,
+    onTabEdit,
+    onTabDelete,
+  ]);
 
   useEffect(() => {
     const beforeUnloadListener = (e) => {

@@ -1,0 +1,10 @@
+.tabsContainer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 8.5in;
+  margin: auto;
+  margin-top: 12px;
+  padding-bottom: 0;
+  border-radius: 12px;
+}

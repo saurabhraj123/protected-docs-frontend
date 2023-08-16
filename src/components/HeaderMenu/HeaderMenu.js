@@ -1,39 +1,16 @@
 import React from "react";
 import classes from "./HeaderMenu.module.css";
-import TabItem from "./TabItem";
 
-const HeaderMenu = ({
-  tabs,
-  activeTabId,
-  editableTabId,
-  onTabChange,
-  onCreateTab,
-  onTabEdit,
-  onTabDelete,
-}) => {
+const HeaderMenu = () => {
   return (
     <div className={classes.container}>
-      {tabs.map((tab) => {
-        return (
-          <TabItem
-            key={tab.id}
-            id={tab.id}
-            title={tab.title}
-            isEditable={tab.id === editableTabId}
-            activeTabId={activeTabId}
-            onClick={onTabChange}
-            onEdit={onTabEdit}
-            onDelete={onTabDelete}
-          />
-        );
-      })}
-
-      <button
-        className={classes.button}
-        onClick={() => onCreateTab("Untitled")}
-      >
-        +
-      </button>
+      <div className={classes.headContainer}>
+        <img src="logo.png" alt="logo" className={classes.logo} />
+        <div className={classes.headBtncontainer}>
+          <button className={classes.button}>Change Password</button>
+          <button className={classes.button}>Delete</button>
+        </div>
+      </div>
     </div>
   );
 };

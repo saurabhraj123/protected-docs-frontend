@@ -63,16 +63,15 @@ const TabItem = ({
   ].join(" ");
 
   return (
-    <div className={tabClasses}>
-      <div
-        onClick={handleClick}
-        contentEditable={isEditable}
-        onInput={handleChange}
-        onBlur={saveTitle}
-        ref={tabRef}
-      >
-        {title}
-      </div>
+    <div
+      className={tabClasses}
+      onClick={handleClick}
+      contentEditable={isEditable}
+      onInput={handleChange}
+      onBlur={saveTitle}
+      ref={tabRef}
+    >
+      {title}
 
       <AiOutlineClose
         style={{ fontSize: "14px" }}

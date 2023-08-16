@@ -3,7 +3,9 @@
   height: 11in;
   padding: 1in;
   margin: 1rem;
-  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+  margin-top: 0;
+  border: 1.5px solid rgb(206, 203, 203);
+  border-top: 1.5px solid rgb(206, 203, 203);
   background-color: white;
 }
 

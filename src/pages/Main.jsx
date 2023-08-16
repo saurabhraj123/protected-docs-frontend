@@ -130,6 +130,14 @@ const Main = () => {
             },
           }
         );
+
+        const updatedTabs = [...tabs];
+        updatedTabs.forEach((tab) => {
+          if (tab.id === id) {
+            tab.title = newTitle;
+          }
+        });
+        setTabs(updatedTabs);
       } catch (err) {
         console.log(err);
       }
@@ -227,7 +235,17 @@ const Main = () => {
             onTabDelete={handleDocumentDelete}
           />
 
-          <TextEditor roomId={roomId} documentId={activeDocumentId} />
+          <TextEditor
+            roomId={roomId}
+            documentId={activeDocumentId}
+            tabs={tabs}
+            activeTabId={activeDocumentId}
+            editableTabId={editableTabId}
+            onTabChange={handleActiveDocumentChange}
+            onCreateTab={handleCreateTab}
+            onTabEdit={handleTitleEdit}
+            onTabDelete={handleDocumentDelete}
+          />
         </>
       )}
     </div>
