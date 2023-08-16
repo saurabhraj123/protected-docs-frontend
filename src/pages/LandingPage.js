@@ -8,6 +8,7 @@ const LandingPage = () => {
 
   return (
     <div className={classes.page}>
+      <img src="logo.png" alt="logo" className={classes.logo} />
       <div className={classes.container}>
         <h1 className={classes.heading}>Welcome to Protected Docs</h1>
         <p className={classes.subText}>
