@@ -21,10 +21,35 @@ const HeaderMenu = () => {
         });
 
         if (res.status === 200) {
+          window.alert("Room deleted successfully. Logging out...");
           navigate("/");
         }
       } catch (err) {
         console.log("err", err);
+      }
+    }
+  };
+
+  const handlePasswordChange = async () => {
+    const newPassword = window.prompt("Enter new password");
+    if (newPassword) {
+      try {
+        const token = sessionStorage.getItem("token");
+        const res = await axios.put(
+          `${BACKEND_URI}/api/rooms/update`,
+          { password: newPassword },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (res.status === 200) {
+          window.alert("Password changed successfully");
+        }
+      } catch (err) {
+        console.log(err);
       }
     }
   };
@@ -39,7 +64,9 @@ const HeaderMenu = () => {
           onClick={() => navigate("/")}
         />
         <div className={classes.headBtncontainer}>
-          <button className={classes.button}>Change Password</button>
+          <button className={classes.button} onClick={handlePasswordChange}>
+            Change Password
+          </button>
           <button className={classes.button} onClick={handleDelete}>
             Delete
           </button>
