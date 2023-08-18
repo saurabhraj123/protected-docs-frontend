@@ -13,7 +13,7 @@ const Main = () => {
   const [editableTabId, setEditableTabId] = useState(null);
   const [isNewUser, setIsNewUser] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [tabs, setTabs] = useState([]);
+  const [tabs, setTabs] = useState([{ id: -1, title: "Untitled" }]);
 
   const { roomName } = useParams();
 
@@ -223,31 +223,31 @@ const Main = () => {
         />
       )}
 
-      {!isNewUser && isLoggedIn && (
-        <>
-          <HeaderMenu
-            tabs={tabs}
-            activeTabId={activeDocumentId}
-            editableTabId={editableTabId}
-            onTabChange={handleActiveDocumentChange}
-            onCreateTab={handleCreateTab}
-            onTabEdit={handleTitleEdit}
-            onTabDelete={handleDocumentDelete}
-          />
+      {/* {!isNewUser && isLoggedIn && ( */}
+      <div className={classes.bodyContainer}>
+        <HeaderMenu
+          tabs={tabs}
+          activeTabId={activeDocumentId}
+          editableTabId={editableTabId}
+          onTabChange={handleActiveDocumentChange}
+          onCreateTab={handleCreateTab}
+          onTabEdit={handleTitleEdit}
+          onTabDelete={handleDocumentDelete}
+        />
 
-          <TextEditor
-            roomId={roomId}
-            documentId={activeDocumentId}
-            tabs={tabs}
-            activeTabId={activeDocumentId}
-            editableTabId={editableTabId}
-            onTabChange={handleActiveDocumentChange}
-            onCreateTab={handleCreateTab}
-            onTabEdit={handleTitleEdit}
-            onTabDelete={handleDocumentDelete}
-          />
-        </>
-      )}
+        <TextEditor
+          roomId={roomId}
+          documentId={activeDocumentId}
+          tabs={tabs}
+          activeTabId={activeDocumentId}
+          editableTabId={editableTabId}
+          onTabChange={handleActiveDocumentChange}
+          onCreateTab={handleCreateTab}
+          onTabEdit={handleTitleEdit}
+          onTabDelete={handleDocumentDelete}
+        />
+      </div>
+      {/* )} */}
     </div>
   );
 };

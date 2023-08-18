@@ -25,6 +25,7 @@ const HeaderMenu = () => {
           navigate("/");
         }
       } catch (err) {
+        window.alert("Something went wrong..");
         console.log("err", err);
       }
     }
@@ -49,6 +50,7 @@ const HeaderMenu = () => {
           window.alert("Password changed successfully");
         }
       } catch (err) {
+        window.alert("Something went wrong..");
         console.log(err);
       }
     }

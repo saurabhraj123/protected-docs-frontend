@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
@@ -14,6 +14,7 @@
     50% 50% repeat;
   opacity: 0.8;
   color: white;
+  z-index: 9999999;
 }
 
 .modalContainer {
@@ -21,7 +22,7 @@
   background-color: black;
   min-width: 290px;
   max-width: 300px;
-  padding: 4px;
+  padding: 4px 4px 8px 4px;
   border-radius: 6px;
 }
 
@@ -95,11 +96,11 @@
   gap: 10px;
 }
 
-button {
-  display: flex;
+.btnContainer button {
   flex-direction: row;
-  padding: 8px;
+  padding: 8px 9px;
+  border-radius: 4px;
   font-size: 14px;
-  flex-direction: flex-end;
+  margin-top: 3px;
   cursor: pointer;
 }
