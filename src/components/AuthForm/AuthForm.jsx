@@ -1,8 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import classes from "./AuthForm.module.css";
 
 const AuthForm = ({ mode, roomName, onSubmit }) => {
   const [password, setPassword] = useState("");
+
+  const btnRef = useRef(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.keyCode === 13) btnRef.current.click();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   return (
     <div className={classes.container}>
@@ -33,7 +47,7 @@ const AuthForm = ({ mode, roomName, onSubmit }) => {
             className={classes.passwordField}
           />
           <div className={classes.btnContainer}>
-            <button onClick={() => onSubmit(password)}>
+            <button onClick={() => onSubmit(password)} ref={btnRef}>
               {mode === "signup" ? "Create site" : "Decrypt this site"}
             </button>
           </div>
