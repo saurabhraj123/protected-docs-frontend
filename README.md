@@ -2,6 +2,10 @@
 
 Welcome to Protected Docs – a web application for collaborative document management. This app lets users create private rooms where they can collaboratively work on documents in real time. Each room is password-protected, ensuring that only authorized users can access and edit its contents.
 
+https://github.com/saurabhraj123/protected-docs-frontend/assets/24193157/da823042-59c3-4adc-8d88-339713185ec4
+
+
+
 ## Features
 
 - Create Rooms: Users can create private rooms by entering a password.
